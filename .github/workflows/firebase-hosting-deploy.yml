@@ -1,0 +1,40 @@
+# main 브랜치 푸시 시 Firebase Hosting(live 채널)으로 배포한다.
+#
+# 인증: Workload Identity Federation (키 없는 방식).
+#   조직 정책이 서비스 계정 키 생성을 금지하므로, GitHub OIDC 토큰으로
+#   github-action-1338253434@oneul-ai 서비스 계정을 임퍼소네이트한다.
+#   GCP 쪽 리소스: workload identity pool "github" / provider "github-oidc"
+#   (oneul-ai/oneul-web 리포로 제한됨). 별도 시크릿은 필요 없다.
+#
+# 필요한 리포 변수(vars):
+#   - NEXT_PUBLIC_SITE_URL: 프로덕션 사이트 주소 (canonical/OG/sitemap 기준)
+#   - NEXT_PUBLIC_CONTACT_EMAIL: 공식 Contact 이메일 (선택)
+name: Deploy to Firebase Hosting
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+        env:
+          NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL }}
+          NEXT_PUBLIC_CONTACT_EMAIL: ${{ vars.NEXT_PUBLIC_CONTACT_EMAIL }}
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: projects/653268987731/locations/global/workloadIdentityPools/github/providers/github-oidc
+          service_account: github-action-1338253434@oneul-ai.iam.gserviceaccount.com
+      - run: npx firebase-tools@latest deploy --only hosting --project oneul-ai --non-interactive
