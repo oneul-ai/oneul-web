@@ -1,0 +1,58 @@
+# ONEUL — Full Reference
+
+## Company
+
+- Name: ONEUL Inc.
+- Korean legal name: 주식회사 오엔이유엘
+- Type: Software company
+- Country: South Korea
+- Brand message: Life ON, ONEUL
+- Secondary message (Korean): 오늘을 자각하다. ("Be aware of today.")
+
+ONEUL Inc. is a Korean software company building digital products that help
+people live each day more intentionally. The name ONEUL comes from the Korean
+word "오늘" (oneul), meaning "today". The "ON" in ONEUL is also read as a
+switch turning on — turning your life ON.
+
+ONEUL believes there are many tools for planning the future, but not enough
+tools for living today well. Instead of building large platforms, ONEUL builds
+small products that solve clear problems and help users organize their lives
+and act with intention.
+
+## Design principles
+
+1. Simple — Reduce complexity and keep only what is essential.
+2. Intentional — Help people become aware of their day and their actions,
+   guiding good behavior naturally rather than forcing it.
+3. Human — Prioritize human experience over technology; products should be
+   comfortable to use every day.
+
+## Products
+
+### MyDay (마이데이)
+
+MyDay is an iOS daily planning app by ONEUL designed around morning planning,
+daily focus, and evening reflection. Tagline: "Awake & Aware".
+
+Core concept: focus only on today. Unlike conventional todo apps that keep
+accumulating future tasks, MyDay works in single-day units.
+
+Daily cycle:
+1. Morning — Plan your day: gather today's tasks from calendars, reminders,
+   or direct input.
+2. Day — Focus on today: select the most important tasks as "Must Do" to make
+   the day's priorities clear.
+3. Evening — Reflect on your day, leading to a better tomorrow.
+
+- Official website: https://myday.now
+- Platform: iOS
+- Category: Productivity / daily planning / intentional living
+
+## Site structure
+
+- / — Home: brand, company definition, philosophy, products, manifesto
+- /about — About ONEUL and its philosophy
+- /products — Product list
+- /products/myday — MyDay overview and link to https://myday.now
+- /privacy — Privacy policy
+- /terms — Terms
