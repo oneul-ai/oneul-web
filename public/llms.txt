@@ -2,7 +2,7 @@
 
 > ONEUL Inc. (주식회사 오엔이유엘) is a Korean software company building digital products that help people live each day more intentionally. The name ONEUL comes from the Korean word "오늘", meaning "today". Brand message: "Life ON, ONEUL".
 
-ONEUL builds small, focused products rather than large platforms. Its design principles are Simple (less complexity), Intentional (helping people act with intention), and Human (prioritizing human experience over technology).
+ONEUL builds small, focused products rather than large platforms. Its three working principles are Respect (treat each other as equal colleagues regardless of role or seniority), Execution (show what is good for users by building it, not by talking about it), and Integrity (do what is right by its philosophy, not what is easy).
 
 ## Products
 
@@ -16,7 +16,8 @@ MyDay (마이데이) is an iOS daily planning app by ONEUL, designed around a da
 
 ## Pages
 
-- Home: /
+- Entry (choose company site or product site): /
+- Home: /main
 - About ONEUL: /about
 - Products: /products
 - MyDay: /products/myday

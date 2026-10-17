@@ -7,8 +7,8 @@ import { useEffect, useState } from "react";
 const navItems = [
   { label: "About", href: "/about" },
   { label: "Products", href: "/products" },
-  { label: "Philosophy", href: "/#philosophy" },
-  { label: "Contact", href: "/#contact" },
+  { label: "Philosophy", href: "/main#philosophy" },
+  { label: "Contact", href: "/main#contact" },
 ];
 
 export function Header() {
@@ -41,7 +41,7 @@ export function Header() {
     >
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-5 sm:px-8">
         <Link
-          href="/"
+          href="/main"
           className="text-lg font-bold tracking-[0.08em] text-foreground"
           aria-label="ONEUL 홈"
         >

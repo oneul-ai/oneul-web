@@ -4,21 +4,21 @@ import { Reveal } from "@/components/ui/reveal";
 const principles = [
   {
     number: "01",
-    title: "Simple",
-    en: "Less complexity. More clarity.",
-    ko: "복잡함을 줄이고 꼭 필요한 것만 남깁니다.",
+    title: "Respect",
+    en: "Respect each other, always.",
+    ko: "역할과 연차에 상관없이 서로를 동등한 동료로 존중합니다.",
   },
   {
     number: "02",
-    title: "Intentional",
-    en: "Design that helps people act with intention.",
-    ko: "사용자가 자신의 하루와 행동을 의식할 수 있도록 돕습니다.",
+    title: "Execution",
+    en: "Show what's good for users by building it.",
+    ko: "유저에게 좋은 것은 말이 아니라 실행으로 보여줍니다.",
   },
   {
     number: "03",
-    title: "Human",
-    en: "Technology should disappear into everyday life.",
-    ko: "기술보다 사람의 경험을 우선합니다.",
+    title: "Integrity",
+    en: "Do what's right, not what's easy.",
+    ko: "쉬운 길보다 우리의 철학에 비추어 옳은 길을 택합니다.",
   },
 ];
 

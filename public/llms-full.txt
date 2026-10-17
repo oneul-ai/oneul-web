@@ -19,13 +19,17 @@ tools for living today well. Instead of building large platforms, ONEUL builds
 small products that solve clear problems and help users organize their lives
 and act with intention.
 
-## Design principles
+## How we work — three principles
 
-1. Simple — Reduce complexity and keep only what is essential.
-2. Intentional — Help people become aware of their day and their actions,
-   guiding good behavior naturally rather than forcing it.
-3. Human — Prioritize human experience over technology; products should be
-   comfortable to use every day.
+1. Respect — Respect each other, always. Everyone is an equal colleague
+   regardless of role or seniority; opinions are shared freely, feedback is
+   honest, and courtesy toward people is never dropped.
+2. Execution — Show what is good for users by building it. Good ideas are
+   proven with real products and results, not with talk or documents: build
+   small, use it, fix it fast.
+3. Integrity — Do what is right, not what is easy. When the easy path and the
+   right path diverge, ONEUL chooses the one that matches its philosophy and
+   genuinely helps users' days, over short-term metrics.
 
 ## Products
 
@@ -50,7 +54,8 @@ Daily cycle:
 
 ## Site structure
 
-- / — Home: brand, company definition, philosophy, products, manifesto
+- / — Entry page: choose the company website (/main) or the product website (https://myday.now)
+- /main — Home: brand, company definition, philosophy, products, manifesto
 - /about — About ONEUL and its philosophy
 - /products — Product list
 - /products/myday — MyDay overview and link to https://myday.now

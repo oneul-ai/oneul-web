@@ -3,8 +3,6 @@ import { Geist } from "next/font/google";
 import { siteConfig } from "@/lib/site-config";
 import { absoluteUrl, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/json-ld";
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
 import { FirebaseAnalytics } from "@/components/analytics/firebase-analytics";
 import "./globals.css";
 
@@ -67,9 +65,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <noscript>
           <style>{`.reveal{opacity:1;transform:none}`}</style>
         </noscript>
-        <Header />
-        <div className="flex-1">{children}</div>
-        <Footer />
+        {children}
       </body>
     </html>
   );

@@ -42,7 +42,7 @@ export default function MyDayPage() {
       <JsonLd data={softwareApplicationJsonLd(myday)} />
       <JsonLd
         data={breadcrumbJsonLd([
-          { name: "Home", path: "/" },
+          { name: "Home", path: "/main" },
           { name: "Products", path: "/products" },
           { name: "MyDay", path: "/products/myday" },
         ])}
