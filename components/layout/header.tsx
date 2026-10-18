@@ -3,18 +3,30 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import {
+  locales,
+  localeNames,
+  localeTags,
+  localizePath,
+  rememberLocale,
+  stripLocale,
+  type Locale,
+} from "@/lib/i18n/locales";
+import type { Dictionary } from "@/lib/i18n/dictionaries/ko";
 
-const navItems = [
-  { label: "About", href: "/about" },
-  { label: "Products", href: "/products" },
-  { label: "Philosophy", href: "/main#philosophy" },
-  { label: "Contact", href: "/main#contact" },
-];
+type NavText = Dictionary["nav"];
 
-export function Header() {
+export function Header({ locale, t }: { locale: Locale; t: NavText }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+
+  const navItems = [
+    { label: t.about, href: localizePath(locale, "/about") },
+    { label: t.products, href: localizePath(locale, "/products") },
+    { label: t.philosophy, href: localizePath(locale, "/main#philosophy") },
+    { label: t.contact, href: localizePath(locale, "/main#contact") },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -31,6 +43,41 @@ export function Header() {
     !href.includes("#") &&
     (pathname === href || pathname.startsWith(`${href}/`));
 
+  // 현재 페이지의 다른 언어 버전으로 가는 링크
+  const basePath = stripLocale(pathname);
+  const languageLinks = locales.map((l) => ({
+    locale: l,
+    label: localeNames[l],
+    href: localizePath(l, basePath),
+    current: l === locale,
+  }));
+
+  const LanguageSwitcher = ({ className = "" }: { className?: string }) => (
+    <nav aria-label={t.language} className={className}>
+      <ul className="flex items-center gap-3 text-xs">
+        {languageLinks.map((item) => (
+          <li key={item.locale}>
+            <Link
+              href={item.href}
+              lang={localeTags[item.locale]}
+              hrefLang={localeTags[item.locale]}
+              aria-current={item.current ? "page" : undefined}
+              onClick={() => {
+                rememberLocale(item.locale);
+                setOpen(false);
+              }}
+              className={`transition-colors hover:text-foreground ${
+                item.current ? "font-medium text-foreground" : "text-muted"
+              }`}
+            >
+              {item.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+
   return (
     <header
       className={`sticky top-0 z-50 transition-colors duration-300 ${
@@ -41,38 +88,41 @@ export function Header() {
     >
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-5 sm:px-8">
         <Link
-          href="/main"
+          href={localizePath(locale, "/main")}
           className="text-lg font-bold tracking-[0.08em] text-foreground"
-          aria-label="ONEUL 홈"
+          aria-label={t.homeAria}
         >
           ONEUL
         </Link>
 
-        <nav aria-label="주요 메뉴" className="hidden sm:block">
-          <ul className="flex items-center gap-8">
-            {navItems.map((item) => (
-              <li key={item.label}>
-                <Link
-                  href={item.href}
-                  className={`text-sm transition-colors hover:text-foreground ${
-                    isActive(item.href)
-                      ? "font-medium text-foreground"
-                      : "text-muted"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <div className="hidden items-center gap-8 sm:flex">
+          <nav aria-label={t.mainMenu}>
+            <ul className="flex items-center gap-8">
+              {navItems.map((item) => (
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
+                    className={`text-sm transition-colors hover:text-foreground ${
+                      isActive(item.href)
+                        ? "font-medium text-foreground"
+                        : "text-muted"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <LanguageSwitcher className="border-l border-border pl-6" />
+        </div>
 
         <button
           type="button"
           className="flex h-10 w-10 items-center justify-center sm:hidden"
           aria-expanded={open}
           aria-controls="mobile-nav"
-          aria-label={open ? "메뉴 닫기" : "메뉴 열기"}
+          aria-label={open ? t.closeMenu : t.openMenu}
           onClick={() => setOpen((v) => !v)}
         >
           <span className="relative block h-[10px] w-5">
@@ -90,25 +140,27 @@ export function Header() {
         </button>
       </div>
 
-      <nav
+      <div
         id="mobile-nav"
-        aria-label="모바일 메뉴"
         className={`sm:hidden ${open ? "block" : "hidden"}`}
       >
-        <ul className="space-y-1 border-b border-border bg-background px-5 pb-6 pt-2">
-          {navItems.map((item) => (
-            <li key={item.label}>
-              <Link
-                href={item.href}
-                className="block py-2.5 text-base text-foreground"
-                onClick={() => setOpen(false)}
-              >
-                {item.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
+        <nav aria-label={t.mobileMenu}>
+          <ul className="space-y-1 bg-background px-5 pt-2">
+            {navItems.map((item) => (
+              <li key={item.label}>
+                <Link
+                  href={item.href}
+                  className="block py-2.5 text-base text-foreground"
+                  onClick={() => setOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <LanguageSwitcher className="border-b border-border bg-background px-5 pb-6 pt-4" />
+      </div>
     </header>
   );
 }

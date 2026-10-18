@@ -1,16 +1,18 @@
 import Link from "next/link";
 import { siteConfig } from "@/lib/site-config";
 import { products } from "@/data/products";
+import { localizePath, type Locale } from "@/lib/i18n/locales";
+import type { Dictionary } from "@/lib/i18n/dictionaries/ko";
 import { Container } from "@/components/ui/container";
 
-const footerLinks: { label: string; href: string; external?: boolean }[] = [
-  { label: "Products", href: "/products" },
-  ...products.map((p) => ({ label: p.name, href: p.url, external: true })),
-  { label: "Privacy", href: "/privacy" },
-  { label: "Terms", href: "/terms" },
-];
+export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
+  const footerLinks: { label: string; href: string; external?: boolean }[] = [
+    { label: dict.nav.products, href: localizePath(locale, "/products") },
+    ...products.map((p) => ({ label: p.name, href: p.url, external: true })),
+    { label: dict.footer.privacy, href: localizePath(locale, "/privacy") },
+    { label: dict.footer.terms, href: localizePath(locale, "/terms") },
+  ];
 
-export function Footer() {
   return (
     <footer id="contact" className="border-t border-border">
       <Container className="py-14 sm:py-20">
@@ -18,11 +20,11 @@ export function Footer() {
           <div className="max-w-sm">
             <p className="text-lg font-bold tracking-[0.08em]">ONEUL</p>
             <p className="mt-4 text-sm leading-relaxed text-muted">
-              {siteConfig.definitionKo}
+              {dict.company.definition}
             </p>
             <div className="mt-6 text-sm text-muted">
               <p>{siteConfig.legalName}</p>
-              <p>{siteConfig.legalNameKo}</p>
+              <p lang="ko">{siteConfig.legalNameKo}</p>
               {siteConfig.contactEmail && (
                 <p className="mt-3">
                   <a
@@ -36,7 +38,7 @@ export function Footer() {
             </div>
           </div>
 
-          <nav aria-label="푸터 메뉴">
+          <nav aria-label={dict.footer.menuAria}>
             <ul className="space-y-3 text-sm">
               {footerLinks.map((link) =>
                 link.external ? (
@@ -67,8 +69,8 @@ export function Footer() {
         </div>
 
         <p className="mt-14 border-t border-border pt-6 text-xs text-muted">
-          © {new Date().getFullYear()} {siteConfig.legalName} All rights
-          reserved.
+          © {new Date().getFullYear()} {siteConfig.legalName}{" "}
+          {dict.footer.rights}
         </p>
       </Container>
     </footer>

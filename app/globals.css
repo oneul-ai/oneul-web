@@ -129,3 +129,43 @@ body {
     animation: none;
   }
 }
+
+/* 일본어/중국어 페이지 글꼴 — 한자/가나가 한국어 글꼴로 그려지지 않도록 */
+html:lang(ja) body {
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont,
+    "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic",
+    Meiryo, sans-serif;
+}
+
+html:lang(zh-CN) body {
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont,
+    "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei",
+    sans-serif;
+}
+
+html:lang(zh-TW) body {
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont,
+    "PingFang TC", "Hiragino Sans CNS", "Noto Sans TC", "Microsoft JhengHei",
+    sans-serif;
+}
+
+/*
+ * 진입 페이지 언어 표시 — 네 언어를 모두 렌더하고 <html data-locale> 에 맞는 것만 보여준다.
+ * 속성은 인라인 스크립트가 hydrate 전에 붙이고, JS가 없으면 한국어가 보인다.
+ */
+.l-ko,
+.l-en,
+.l-ja,
+.l-zh,
+.l-zh-tw {
+  display: none;
+}
+
+html:not([data-locale]) .l-ko,
+html[data-locale="ko"] .l-ko,
+html[data-locale="en"] .l-en,
+html[data-locale="ja"] .l-ja,
+html[data-locale="zh"] .l-zh,
+html[data-locale="zh-tw"] .l-zh-tw {
+  display: inline;
+}

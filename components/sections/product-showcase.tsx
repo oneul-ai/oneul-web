@@ -1,19 +1,25 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Product } from "@/data/products";
+import { localizePath, type Locale } from "@/lib/i18n/locales";
+import type { Dictionary } from "@/lib/i18n/dictionaries/ko";
+import { fill } from "@/lib/i18n";
 import { Reveal } from "@/components/ui/reveal";
 
-const dayCycle = [
-  { time: "Morning", label: "나의 하루 계획하기" },
-  { time: "Day", label: "오늘에 집중하기" },
-  { time: "Evening", label: "나의 하루 돌아보기" },
-];
-
 /**
- * 제품 쇼케이스 카드. products 데이터만으로 렌더링되며,
+ * 제품 쇼케이스 카드. products 데이터와 사전의 product.<id> 문구로 렌더링되며,
  * product.image / product.icon이 채워지면 비주얼 영역이 자동으로 노출된다.
  */
-export function ProductShowcase({ product }: { product: Product }) {
+export function ProductShowcase({
+  product,
+  locale,
+  dict,
+}: {
+  product: Product;
+  locale: Locale;
+  dict: Dictionary;
+}) {
+  const text = dict.product[product.id];
   return (
     <Reveal as="article" aria-labelledby={`product-${product.id}`}>
       <div className="rounded-2xl border border-border bg-surface p-8 sm:p-14">
@@ -37,14 +43,14 @@ export function ProductShowcase({ product }: { product: Product }) {
                   {product.name}
                 </h3>
                 <p className="mt-1 text-base font-medium text-accent">
-                  {product.tagline}
+                  {text.tagline}
                 </p>
               </div>
             </div>
 
-            <p className="mt-8 text-lg leading-relaxed">{product.summaryKo}</p>
+            <p className="mt-8 text-lg leading-relaxed">{text.summary}</p>
             <p className="mt-4 text-base leading-relaxed text-muted">
-              {product.definition}
+              {text.definition}
             </p>
 
             <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3">
@@ -54,7 +60,7 @@ export function ProductShowcase({ product }: { product: Product }) {
                 rel="noopener noreferrer"
                 className="group inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-medium text-background transition-opacity hover:opacity-85"
               >
-                Discover {product.name}
+                {fill(dict.common.discover, { name: product.name })}
                 <span
                   aria-hidden="true"
                   className="transition-transform group-hover:translate-x-1"
@@ -63,10 +69,10 @@ export function ProductShowcase({ product }: { product: Product }) {
                 </span>
               </a>
               <Link
-                href={product.path}
+                href={localizePath(locale, product.path)}
                 className="text-sm font-medium text-muted underline underline-offset-4 transition-colors hover:text-foreground"
               >
-                Learn more
+                {dict.common.learnMore}
               </Link>
             </div>
           </div>
@@ -82,10 +88,10 @@ export function ProductShowcase({ product }: { product: Product }) {
               />
             ) : (
               <ol
-                aria-label={`${product.name} 하루 사이클`}
+                aria-label={fill(dict.products.cycleAria, { name: product.name })}
                 className="rounded-xl border border-border bg-background p-6"
               >
-                {dayCycle.map((step, i) => (
+                {dict.cycle.map((step, i) => (
                   <li key={step.time}>
                     {i > 0 && (
                       <span
@@ -98,7 +104,7 @@ export function ProductShowcase({ product }: { product: Product }) {
                     <p className="text-xs font-medium uppercase tracking-[0.18em] text-accent">
                       {step.time}
                     </p>
-                    <p className="mt-1 text-base font-medium">{step.label}</p>
+                    <p className="mt-1 text-base font-medium">{step.title}</p>
                   </li>
                 ))}
               </ol>

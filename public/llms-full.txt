@@ -54,10 +54,17 @@ Daily cycle:
 
 ## Site structure
 
-- / — Entry page: choose the company website (/main) or the product website (https://myday.now)
-- /main — Home: brand, company definition, philosophy, products, manifesto
-- /about — About ONEUL and its philosophy
-- /products — Product list
-- /products/myday — MyDay overview and link to https://myday.now
-- /privacy — Privacy policy
-- /terms — Terms
+Languages: Korean (ko), English (en), Japanese (ja), Simplified Chinese (zh),
+Traditional Chinese (zh-tw). All company pages are prefixed with the locale
+(/ko, /en, /ja, /zh, /zh-tw). The entry page picks the language from the
+visitor's time zone (Korea → ko, Japan → ja, mainland China → zh, Taiwan /
+Hong Kong / Macau → zh-tw, everywhere else → en); visitors can switch
+languages in the site header and the choice is remembered.
+
+- / — Entry page: choose the company website (/{locale}/main) or the product website (https://myday.now)
+- /{locale}/main — Home: brand, company definition, philosophy, products, manifesto
+- /{locale}/about — About ONEUL and its philosophy
+- /{locale}/products — Product list
+- /{locale}/products/myday — MyDay overview and link to https://myday.now
+- /{locale}/privacy — Privacy policy
+- /{locale}/terms — Terms

@@ -16,8 +16,10 @@ MyDay (마이데이) is an iOS daily planning app by ONEUL, designed around a da
 
 ## Pages
 
+The site is available in Korean (ko), English (en), Japanese (ja), Simplified Chinese (zh) and Traditional Chinese (zh-tw). Every company page lives under a locale prefix: /ko, /en, /ja, /zh, /zh-tw. The language is chosen automatically from the visitor's time zone (Korea → ko, Japan → ja, mainland China → zh, Taiwan/Hong Kong/Macau → zh-tw, elsewhere → en) and can be switched in the header.
+
 - Entry (choose company site or product site): /
-- Home: /main
-- About ONEUL: /about
-- Products: /products
-- MyDay: /products/myday
+- Home: /{locale}/main (e.g. /en/main)
+- About ONEUL: /{locale}/about
+- Products: /{locale}/products
+- MyDay: /{locale}/products/myday
